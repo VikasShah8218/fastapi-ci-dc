@@ -28,4 +28,3 @@ jobs:
           context: .
           push: true
           tags: mrshah8218/fastapi-cicd:latest
-#gfjkrsfbnglsdfhngfljsdbnvljsdbnlgfbnvsdljbgvlbj

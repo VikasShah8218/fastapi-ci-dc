@@ -16,6 +16,10 @@ EXPOSE 8000
 # Run the application when the container starts
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
+
+# docker build -t fastapi-cicd .
+# docker run -d -p 8000:8000 fastapi-cicd
+
 # docker tag fastapi-cicd mrshah8218/fastapi-cicd:latest
 # docker push mrshah8218/fastapi-cicd:latest
 # docker run -d -p 8000:8000 mrshah8218/fastapi-cicd:latest

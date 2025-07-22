@@ -36,10 +36,10 @@ jobs:
 
       - name: Test the built image
         run: |
-          # Load the built image into the local Docker daemon
-          docker load --input $(docker buildx imagetools inspect --format "{{.Manifest}}" ${{ env.IMAGE_NAME }}:local-test)
+          # Build the image separately for testing
+          docker build -t local-test .
           # Run the container
-          docker run -d --name test-container -p 8000:8000 ${{ env.IMAGE_NAME }}:local-test
+          docker run -d --name test-container -p 8000:8000 local-test
           sleep 5
           curl --fail http://localhost:8000
           docker stop test-container

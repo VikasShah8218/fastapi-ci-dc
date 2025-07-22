@@ -18,3 +18,4 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 # docker tag fastapi-cicd mrshah8218/fastapi-cicd:latest
 # docker push mrshah8218/fastapi-cicd:latest
 # docker run -d -p 8000:8000 mrshah8218/fastapi-cicd:latest
+# docker pull mrshah8218/fastapi-cicd:latest

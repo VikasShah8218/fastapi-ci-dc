@@ -25,7 +25,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build and test Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -36,6 +36,9 @@ jobs:
 
       - name: Test the built image
         run: |
+          # Load the built image into the local Docker daemon
+          docker load --input $(docker buildx imagetools inspect --format "{{.Manifest}}" ${{ env.IMAGE_NAME }}:local-test)
+          # Run the container
           docker run -d --name test-container -p 8000:8000 ${{ env.IMAGE_NAME }}:local-test
           sleep 5
           curl --fail http://localhost:8000
@@ -43,6 +46,7 @@ jobs:
           docker rm test-container
 
       - name: Push to Docker Hub
+        if: success()  # Only push if previous steps succeeded
         uses: docker/build-push-action@v5
         with:
           context: .
